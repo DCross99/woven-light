@@ -1,5 +1,7 @@
 from flask import Flask, request
 
+from tasks import get_task
+
 app = Flask(__name__)
 
 @app.route('/tasks/<id>', methods=['GET', 'POST'])
