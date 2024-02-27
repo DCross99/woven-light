@@ -1,6 +1,5 @@
 import pytest
-
-from api.tfl.config import base_tfl_url, VALID_LINES
+from api.tfl_url import base_tfl_url, VALID_LINES
 
 
 # TODO: tests required - one line, multiple lines, invalid lines, capitalised lines, no lines
@@ -32,10 +31,10 @@ def test_base_tfl_url_invalid_lines(input_lines: list[str]):
 def test_base_tfl_url_no_lines():
     with pytest.raises(Exception) as err:
         base_tfl_url([])
-    assert err.value.args[0] == f"No lines provided"
+    assert err.value.args[0] == "No lines provided"
 
 
 def test_base_tfl_url_lines_null():
     with pytest.raises(Exception) as err:
         base_tfl_url()
-    assert err.value.args[0] == f"No lines provided"
+    assert err.value.args[0] == "No lines provided"

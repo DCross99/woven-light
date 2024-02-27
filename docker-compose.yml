@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: woven-light-db
+    image: postgres:16.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=db
+    volumes:
+      - ./woven_light/db:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  api:
+    container_name: woven_light_api
+    build:
+      context: .
+      dockerfile: woven_light/api/api.Dockerfile
+    ports:
+      - "5555:5555"
+    depends_on:
+      - db
+    environment:
+      - PORT=5555
+#
+#  postgres:
+#    container_name: woven_light_postgres
+#    restart: always
+#    build:
+#      context: .
+#      dockerfile: woven_light/db/db.Dockerfile
+#    volumes:
+#      - ./var/pgdata:/var/lib/postgresql/data
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#    ports:
+#      - "5432:5432"
+#volumes:
+#  postgres:
+#    driver: localhost
+#
+#  tfl_scraper:
+#    container_name: woven_light_tfl_scraper
+#    build:
+#      context: .
+#      dockerfile: woven_light/tfl_scraper/api.Dockerfile
+#
+#
