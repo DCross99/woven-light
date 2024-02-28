@@ -1,15 +1,21 @@
-import requests
+import time
+from db_connector import connect
+from scrape import scrape_urls_from_db
 
 
 def main():
-    base_url = (
-        "https://api.tfl.gov.uk/Line/bakerloo,jubilee,victoria,central,tram/Disruption"
-    )
+    while True:
+        try:
+            conn = connect()
+            break
+        except:
+            print("Sleeping for 1 minutes as db is not ready")
+            time.sleep(60)
+    while True:
+        scrape_urls_from_db(conn)
+        # Sleep for 5 minutes, so we do not hammer tfl endpoint/ db
+        print("Sleeping for 5 minutes")
+        time.sleep(300)
 
-    response = requests.get(base_url)
-    print(response.request)
-    data = response.text
-    if len(data) != 0:
-        print(data)
 
-    print("No Disruption")
+main()

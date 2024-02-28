@@ -25,3 +25,32 @@ Content-Type: application/json
 
 ###
 
+###
+
+# curl -X POST -H 'Content-Type: application/json' -d '{"scheduler_time" :
+#"2021-11-12T17:00:00", "lines":"bakerloo,jubilee"}'
+#http://localhost:5555/tasks
+POST http://localhost:5555/tasks
+Content-Type: application/json
+
+{
+  "scheduler_time": "2021-11-12T17:00:00",
+  "lines": "bakerloo,jubilee"
+}
+
+###
+
+###
+
+# curl -X POST -H 'Content-Type: application/json' -d '{"scheduler_time" :
+#"2021-11-12T17:00:00", "lines":"bakerloo,jubilee"}'
+#http://localhost:5555/tasks
+POST http://localhost:5555/tasks
+Content-Type: application/json
+
+{
+  "scheduler_time": "2024-02-27T16:40:00",
+  "lines": "bakerloo,jubilee"
+}
+
+###
